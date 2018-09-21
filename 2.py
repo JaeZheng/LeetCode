@@ -44,4 +44,3 @@ class Solution:
         return list(map(int, str_l3))
 
 
-
