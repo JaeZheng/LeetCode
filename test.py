@@ -1,6 +1,3 @@
-a= [0,1,2]
+a= [0,1,3,3,43]
 b= [0,1,2]
-c  =[a,b]
-print(c)
-print(a==b)
-print(a in c)
+print(a.index(3))
