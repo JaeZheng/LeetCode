@@ -1,4 +1,6 @@
-a = "XXX"
-b = "X"
-s = a.count(b)
-print(s)
+a= [0,1,2]
+b= [0,1,2]
+c  =[a,b]
+print(c)
+print(a==b)
+print(a in c)
