@@ -17,6 +17,32 @@
 
 
 # 暴力解法，对数组中每个元素计算当前元素能接的雨水数量，叠加
+# class Solution(object):
+#     def trap(self, height):
+#         """
+#         :type height: List[int]
+#         :rtype: int
+#         """
+#         size = len(height)
+#         if size <= 1:
+#             return 0
+#         abs = 0
+#         highest_index = 0
+#         highest = 0
+#         for i in range(size):
+#             if height[i] > highest:
+#                 highest_index = i
+#                 highest = height[i]
+#         for i in range(size):
+#             max_side = 0
+#             if i <= highest_index:
+#                 max_side = max(height[:i+1])
+#             else:
+#                 max_side = max(height[i:])
+#             abs += max_side - height[i]
+#         return abs
+
+# 动态规划，记下每个元素的最大左值和最大右值
 class Solution(object):
     def trap(self, height):
         """
@@ -27,25 +53,23 @@ class Solution(object):
         if size <= 1:
             return 0
         abs = 0
-        highest_index = 0
-        highest = 0
+        left_max, right_max = [0 for _ in range(size)], [0 for _ in range(size)]
+        i = 1
+        left_max[0] = height[0]
+        while i < size:
+            left_max[i] = max(left_max[i-1], height[i])
+            i += 1
+        i = size - 2
+        right_max[size-1] = height[-1]
+        while i >= 0:
+            right_max[i] = max(right_max[i+1], height[i])
+            i -= 1
         for i in range(size):
-            if height[i] > highest:
-                highest_index = i
-                highest = height[i]
-        for i in range(size):
-            max_side = 0
-            if i <= highest_index:
-                max_side = max(height[:i])
-            else:
-                for j in range(i, size):
-                    if height[j] > max_side:
-                        max_side = height[j]
-            abs += max_side - height[i]
+            abs += min(left_max[i], right_max[i]) - height[i]
         return abs
 
 
 solution = Solution()
-height = [0,1,0,2,1,0,1,3,2,1,2,1]
+height = [2,0,2]
 result = solution.trap(height)
 print(result)
