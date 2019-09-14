@@ -1,4 +1,8 @@
-## zip()函数单个参数
-list1 = [1, 2, 3, 4]
-dicted = {k: v for (k,v) in zip(list1, range(len(list1)))}
-print(dicted)
+a = ["eat", "tea", "tan", "ate", "nat", "bat"]
+print(a)
+for i in range(len(a)):
+    a[i]="".join((lambda x:(x.sort(),x)[1])(list(a[i])))
+print(a)
+s = "eat"
+s = "".join((lambda x:(x.sort(), x)[1])(list(s)))
+print(s)
